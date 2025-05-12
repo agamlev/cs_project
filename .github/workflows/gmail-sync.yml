@@ -1,0 +1,26 @@
+name: Gmail Sync Hourly
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # כל שעה עגולה
+  workflow_dispatch:     # מאפשר להריץ גם ידנית
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run gmail sync script
+        env:
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: python jira_gmail_sync.py
