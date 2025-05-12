@@ -1,12 +1,21 @@
-from jira_fetch import fetch_hp_to_issue
+import json
+import os
 
-def main():
-    print("🔁 מתחיל סנכרון Jira...")
-    hp_map = fetch_hp_to_issue()
-    if not hp_map:
-        print("❌ לא נמצאו ח.פ בטיקטים הפתוחים בפרויקט FCS.")
-    else:
-        print("✅ מיפוי ח.פ → טיקט:", hp_map)
+MAPPING_FILE = "hp_mapping.json"
 
+def load_hp_mapping():
+    """טוען את מיפוי הח.פ מתוך קובץ JSON אם קיים"""
+    if not os.path.exists(MAPPING_FILE):
+        print("לא נמצא קובץ מיפוי:", MAPPING_FILE)
+        return {}
+
+    with open(MAPPING_FILE, "r", encoding="utf-8") as f:
+        mapping = json.load(f)
+        print("מיפוי נטען בהצלחה:\n")
+        for hp, issue_key in mapping.items():
+            print(f"ח.פ: {hp} → טיקט: {issue_key}")
+        return mapping
+
+# הרצה לבדיקה מקומית
 if __name__ == "__main__":
-    main()
+    mapping = load_hp_mapping()
