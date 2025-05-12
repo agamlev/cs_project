@@ -1,8 +1,8 @@
-name: Run Sync Hourly
+name: Run Sync Every Minute
 
 on:
   schedule:
-    - cron: '0 * * * *'  # כל שעה עגולה
+    - cron: '* * * * *'  # כל דקה
   workflow_dispatch:     # מאפשר גם להריץ ידנית
 
 jobs:
