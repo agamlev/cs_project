@@ -1,0 +1,18 @@
+name: Run Python Script Hourly
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # כל שעה עגולה
+  workflow_dispatch:     # מאפשר להריץ ידנית גם כן
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Run sync.py
+        run: python sync.py
