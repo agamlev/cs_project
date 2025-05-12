@@ -1,9 +1,9 @@
-name: Run Sync Every Hour
+name: Run Jira-Gmail Sync
 
 on:
   schedule:
     - cron: '0 * * * *'  # כל שעה עגולה
-  workflow_dispatch:     # מאפשר גם להריץ ידנית
+  workflow_dispatch:     # הרצה ידנית
 
 jobs:
   run-script:
@@ -26,8 +26,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run jira_fetch.py (to generate hp_mapping.json)
+      - name: Run jira_fetch.py (to generate mapping file)
         run: python jira_fetch.py
 
-      - name: Run sync script
-        run: python sync.py
+      - name: Run jira_gmail_sync.py (to match emails and update Jira)
+        run: python jira_gmail_sync.py
