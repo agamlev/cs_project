@@ -8,7 +8,7 @@ EMAIL = "agam@arboxapp.com"
 API_TOKEN = os.environ.get("JIRA_API_TOKEN")
 
 HP_FIELDS = ["customfield_10243", "customfield_10244"]
-MAPPING_FILE = "custom_hp_mapping.json"  # שמו של קובץ ה-JSON
+MAPPING_FILE = "custom_hp_mapping.json"  # ← עודכן לשם הנכון
 
 def fetch_hp_to_issue():
     url = f"{JIRA_DOMAIN}/rest/api/3/search"
