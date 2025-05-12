@@ -3,14 +3,14 @@ from requests.auth import HTTPBasicAuth
 import os
 import json
 
+# הגדרות JIRA
 JIRA_DOMAIN = "https://arbox.atlassian.net"
 EMAIL = "agam@arboxapp.com"
 API_TOKEN = os.environ.get("JIRA_API_TOKEN")
-
 HP_FIELDS = ["customfield_10243", "customfield_10244"]
-MAPPING_FILE = "hp_mapping.json"  # שם הקובץ שישמר
+MAPPING_FILE = "custom_hp_mapping.json"  # שם הקובץ שישמר
 
-
+# פונקציה שמביאה את המיפוי מה־Jira
 def fetch_hp_to_issue():
     url = f"{JIRA_DOMAIN}/rest/api/3/search"
     params = {
@@ -41,16 +41,14 @@ def fetch_hp_to_issue():
                 hp_to_issue[hp] = key
     return hp_to_issue
 
-
+# פונקציה ששומרת את המיפוי לקובץ JSON
 def save_hp_mapping(mapping):
-    # שמירה לקובץ JSON
     with open(MAPPING_FILE, "w", encoding="utf-8") as f:
         json.dump(mapping, f, ensure_ascii=False, indent=2)
-    print(f"מיפוי נשמר בקובץ {MAPPING_FILE}")  # הדפסת מידע על שמירת הקובץ
-
+    print(f"מיפוי נשמר בקובץ {MAPPING_FILE}")
 
 # הרצה לבדיקה מקומית
 if __name__ == "__main__":
-    mapping = fetch_hp_to_issue()
-    print(mapping)  # הדפסת המיפוי שהתקבל
-    save_hp_mapping(mapping)  # שמירת המיפוי לקובץ json
+    mapping = fetch_hp_to_issue()  # משיכת המיפוי
+    print(mapping)
+    save_hp_mapping(mapping)  # שמירה לקובץ
