@@ -8,11 +8,16 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    env:
+      JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Run sync.py
+      - name: Install dependencies
+        run: pip install -r requirements.txt || true
+      - name: Run script
         run: python sync.py
+
