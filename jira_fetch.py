@@ -11,7 +11,7 @@ HP_FIELDS = ["customfield_10243", "customfield_10244"]
 def fetch_hp_to_issue():
     url = f"{JIRA_DOMAIN}/rest/api/3/search"
     params = {
-        "jql": 'project = FCS AND status != Done',
+        "jql": 'project = "FCS" AND status != "Done"',
         "fields": "key," + ",".join(HP_FIELDS),
         "maxResults": 100
     }
