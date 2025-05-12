@@ -8,7 +8,7 @@ JIRA_DOMAIN = "https://arbox.atlassian.net"
 EMAIL = "agam@arboxapp.com"
 API_TOKEN = os.environ.get("JIRA_API_TOKEN")
 HP_FIELDS = ["customfield_10243", "customfield_10244"]
-MAPPING_FILE = "hp_mapping.json"  # שם הקובץ שבו נשמור את המיפוי
+MAPPING_FILE = "custom_hp_mapping.json"  # ← עודכן לשם הקובץ האמיתי
 
 def fetch_hp_to_issue():
     url = f"{JIRA_DOMAIN}/rest/api/3/search"
@@ -37,7 +37,7 @@ def fetch_hp_to_issue():
         for field in HP_FIELDS:
             hp = fields.get(field)
             if hp:
-                hp_to_issue[hp] = key
+                hp_to_issue[hp] = key  # אם יש כפילויות – האחרון שיכתוב ינצח, וזה בסדר אצלך
     return hp_to_issue
 
 def save_hp_mapping(mapping):
@@ -47,6 +47,6 @@ def save_hp_mapping(mapping):
 
 # הרצה לבדיקה מקומית
 if __name__ == "__main__":
-    mapping = fetch_hp_to_issue()  # משיכת המיפוי מ-Jira
-    print(mapping)  # הדפס את המיפוי
-    save_hp_mapping(mapping)  # שמור את המיפוי בקובץ JSON
+    mapping = fetch_hp_to_issue()
+    print(mapping)
+    save_hp_mapping(mapping)
