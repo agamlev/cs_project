@@ -1,8 +1,8 @@
-name: Run Sync Every Minute
+name: Run Sync Daily at 18:30 (Israel Time)
 
 on:
   schedule:
-    - cron: '* * * * *'  # כל דקה
+    - cron: '30 15 * * *'  # כל יום ב-15:30 UTC, שזה 18:30 לפי זמן ישראל
   workflow_dispatch:     # מאפשר גם להריץ ידנית
 
 jobs:
