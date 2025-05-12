@@ -2,7 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 JIRA_DOMAIN = "https://arbox.atlassian.net"
-EMAIL = "agam@arbox.com"
+EMAIL = "agam@arboxapp.com"
 import os
 API_TOKEN = os.environ.get("JIRA_API_TOKEN")
 
