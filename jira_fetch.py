@@ -45,7 +45,13 @@ def save_hp_mapping(mapping):
         json.dump(mapping, f, ensure_ascii=False, indent=2)
     print(f"מיפוי נשמר בקובץ {MAPPING_FILE}")
 
+for issue in response.json().get("issues", []):
+    print(issue)
+
+
 if __name__ == "__main__":
     mapping = fetch_hp_to_issue()
     print(mapping)
     save_hp_mapping(mapping)
+
+
