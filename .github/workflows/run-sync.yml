@@ -3,7 +3,7 @@ name: Run Jira-Gmail Sync
 on:
   schedule:
     - cron: '0 * * * *'  # כל שעה עגולה
-  workflow_dispatch:     # הרצה ידנית
+  workflow_dispatch:     # הרצה ידנית מה-UI של גיטהאב
 
 jobs:
   run-script:
@@ -11,6 +11,8 @@ jobs:
 
     env:
       JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      JIRA_DOMAIN: ${{ secrets.JIRA_DOMAIN }}
+      EMAIL: ${{ secrets.EMAIL }}
 
     steps:
       - name: Checkout code
