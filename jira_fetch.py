@@ -4,11 +4,15 @@ import os
 import json
 import gspread
 from google.oauth2.service_account import Credentials
+from dotenv import load_dotenv  # חדש
+
+# טען משתנים מ-.env
+load_dotenv()
 
 # הגדרות Jira
-JIRA_DOMAIN = "https://arbox.atlassian.net"
-EMAIL = "agam@arboxapp.com"
-API_TOKEN = os.environ.get("JIRA_API_TOKEN")
+JIRA_DOMAIN = os.getenv("JIRA_DOMAIN")
+EMAIL = os.getenv("EMAIL")
+API_TOKEN = os.getenv("JIRA_API_TOKEN")
 HP_FIELDS = ["customfield_10243", "customfield_10244"]
 MAPPING_FILE = "custom_hp_mapping.json"
 
